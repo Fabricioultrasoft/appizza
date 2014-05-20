@@ -9,9 +9,9 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>AppPizza - Antonio Teste</title>
+        <title>AppPizza</title>
     </head>
     <body>
-        <h1>Olá Mundo é na cadeia..... rsrs.... teste</h1>
+        <h1>Hello World</h1>
     </body>
 </html>
