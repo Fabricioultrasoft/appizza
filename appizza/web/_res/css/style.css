@@ -1,0 +1,179 @@
+/* 
+    Document   : style
+    Created on : 20/05/2014, 06:24:38
+    Author     : Daniel
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+root { 
+    display: block;
+}
+
+html {
+  height: 100%;
+}
+
+body { margin: 0; color: #373737; font-size: 13px; }
+
+ul, ol, li, p, h1, h2, h3, h4, h5, h6, fieldset, button { margin: 0; padding: 0; border: 0; border-style: none; }
+
+a { text-decoration: none; color: #373737 }
+a:hover { text-decoration: underline }
+a img { border: 0; }
+
+@font-face {
+    font-family: 'Open Sans Regular';
+    src: url('../fonts/opensans-regular-webfont.eot');
+    src: url('../fonts/opensans-regular-webfont.eot?#iefix') format('embedded-opentype'),
+        url('../fonts/opensans-regular-webfont.woff') format('woff'),
+        url('../fonts/opensans-regular-webfont.ttf') format('truetype'),
+        url('../fonts/opensans-regular-webfont.svg#open_sansregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Open Sans Bold';
+    src: url('../fonts/opensans-bold-webfont.eot');
+    src: url('../fonts/opensans-bold-webfont.eot?#iefix') format('embedded-opentype'),
+        url('../fonts/opensans-bold-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+*,
+*:before,
+*:after {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing:    border-box;
+  box-sizing:         border-box;
+}
+
+body {
+    position: relative;
+    font-family: 'Open Sans Regular';
+    min-height: 100%;
+}
+
+body:after {
+    content: '';
+    display: block;
+    height: 50px;
+}
+/* ----------- center ----------- */
+.center {
+    width: 994px;
+    margin: 0 auto;
+}
+
+/* ----------- header ----------*/
+header {
+    background: #2FA302;
+    color: #fff;
+    height:100px;
+}
+
+.logo {
+    background-image: url("../images/logo2.png");
+    float:left;
+    background-repeat: no-repeat;
+    background-size: 60px;
+    padding-left:60px;
+    margin:20px 0;
+}
+.logo:hover {
+    text-decoration: none;
+}
+.logo h1 {
+    font-family: 'Open Sans Bold';
+    font-size: 40px;
+    color: #2C8D06;
+    text-shadow: 0 0.03em #A8DB95;
+}
+#main-menu ul {
+    float: right;
+    margin: 40px 0 40px 40px;
+    list-style-type: none;
+}
+
+#main-menu li {
+    display: inline;
+    margin: 0 20px 0 20px;
+}
+#main-menu li a {
+    color: #E7FFDF;
+}
+#main-menu li a:hover {
+    color: #fff;
+    text-decoration: none;
+}
+
+/* ----------- form styles ----------*/
+.main-form {
+    font-size: 15px;
+}
+
+.main-form  h1 {
+    font-family: "Open Sans Regular";
+    font-size: 30px;
+    border-bottom: 1px solid #B90202;
+    margin: 0 0 10px 0;
+}
+
+.main-form  select {
+    border: 1px solid #ccc;
+    border-radius: 2px;
+    padding: 4px 0;
+    margin: 4px 0;
+}
+.main-form  input[type="text"] {
+    -webkit-appearance: none;
+    margin:0;
+    margin: 2px 0;
+    font-size:14px;
+    border: 1px solid #ccc;
+    border-radius: 2px;
+    padding: 4px;
+}
+
+.main-form  input[type="button"], form1´button {}
+.main-form  input[type="submit"] {
+    -webkit-appearance: none;
+    border: 1px solid;
+    border-radius: 4px;
+    font-size: 14px;
+    background: #2FA302;
+    color: #fff;
+    text-shadow: 0 1px 0.02em #000;
+    padding:4px 20px;
+    margin: 10px 0;
+}
+.main-form input[type="submit"]:hover {
+    background:  #5CC435;
+}
+.main-form label {
+    font-size:14px;
+}
+
+/* ------------- footer ---------------*/
+footer {
+    position: absolute;
+    bottom: 0;
+    background: #B90202;
+    color: #fff;
+    width: 100%;
+}
+footer .center {
+    padding:20px 0;
+}
+
+/* ------------- forms ---------------- */
+#clientes-form {
+
+}
+
+/* ------------ main ----------------- */
+main .center {
+    padding: 40px 0;
+}
