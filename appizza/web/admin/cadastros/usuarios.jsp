@@ -31,8 +31,9 @@
                 <label for="pesquisa"></label><input type="text" id="pesquisa" placeholder="Digite a pesquisa" name="pesquisa"/>
                 <label for="lista-pesquisar-form"></label>
                 <select id="lista-pesquisar-form" name="pesquisa-parametro">
+                    <option value="0">Pesquisar por...</option>
                     <option value="1">Código</option>
-                    <option selected value="2">Nome</option>
+                    <option value="2">Nome</option>
                     <option value="3">Email</option>
                 </select>
                 <input type="submit" value="Enviar" />
@@ -43,7 +44,7 @@
                 String parametro = "";
                 parametro = request.getParameter("pesquisa-parametro");
                 
-                if (pesquisa != null) {
+                if (pesquisa != null && parametro != "0") {
                     try {
 
                         Class.forName("oracle.jdbc.OracleDriver");
