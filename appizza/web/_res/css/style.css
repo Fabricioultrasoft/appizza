@@ -23,7 +23,7 @@ a:hover { text-decoration: underline }
 a img { border: 0; }
 
 @font-face {
-    font-family: 'Open Sans Regular';
+    font-family: 'opensans_regular';
     src: url('../fonts/opensans-regular-webfont.eot');
     src: url('../fonts/opensans-regular-webfont.eot?#iefix') format('embedded-opentype'),
         url('../fonts/opensans-regular-webfont.woff') format('woff'),
@@ -34,25 +34,23 @@ a img { border: 0; }
 }
 
 @font-face {
-    font-family: 'Open Sans Bold';
-    src: url('../fonts/opensans-bold-webfont.eot');
-    src: url('../fonts/opensans-bold-webfont.eot?#iefix') format('embedded-opentype'),
-        url('../fonts/opensans-bold-webfont.woff') format('woff');
+    font-family: 'opensans_bold';
+    src: url('../fonts/opensans-bold-webfont.woff');
     font-weight: normal;
     font-style: normal;
 }
 
-*,
+/* *,
 *:before,
 *:after {
   -webkit-box-sizing: border-box;
   -moz-box-sizing:    border-box;
   box-sizing:         border-box;
-}
+} */
 
 body {
     position: relative;
-    font-family: 'Open Sans Regular';
+    font-family: 'opensans_regular';
     min-height: 100%;
 }
 
@@ -61,13 +59,29 @@ body:after {
     display: block;
     height: 50px;
 }
-/* ----------- center ----------- */
+/* ------------- 
+patterns
+---------------- */
 .center {
     width: 994px;
     margin: 0 auto;
 }
 
-/* ----------- header ----------*/
+.left {
+	float: left;
+}
+
+.right {
+	float: right;
+}
+
+.clear {
+	clear: both;
+}
+
+/* ------------- 
+header
+---------------- */
 header {
     background: #2FA302;
     color: #fff;
@@ -86,7 +100,7 @@ header {
     text-decoration: none;
 }
 .logo h1 {
-    font-family: 'Open Sans Bold';
+    font-family: 'opensans_bold';
     font-size: 40px;
     color: #2C8D06;
     text-shadow: 0 0.03em #A8DB95;
@@ -101,6 +115,7 @@ header {
     display: inline;
     margin: 0 20px 0 20px;
 }
+
 #main-menu li a {
     color: #E7FFDF;
 }
@@ -109,13 +124,39 @@ header {
     text-decoration: none;
 }
 
-/* ----------- form styles ----------*/
+#top-menu ul {
+	padding: 20px 0;
+	float: left;
+	list-style-type: none;
+	width: 100%;
+}
+
+#top-menu ul li {
+	padding: 4px 8px;
+	display: inline;
+	border-radius: 2px;
+	box-shadow: 1px 1px 0.03em #ccc;
+}
+
+#top-menu ul li a:hover{
+	cursor: pointer;
+	color: #747474;
+	text-decoration: none;
+	text-shadow: 0 2px 0 #fff inset; 
+}
+#top-menu .fa{
+	padding-right:4px;
+	font-size: 20px;
+}
+
+/* ------------- 
+form classes
+---------------- */
 .main-form {
     font-size: 15px;
 }
 
 .main-form  h1 {
-    font-family: "Open Sans Regular";
     font-size: 30px;
     border-bottom: 1px solid #B90202;
     margin: 0 0 10px 0;
@@ -127,7 +168,9 @@ header {
     padding: 4px 0;
     margin: 4px 0;
 }
-.main-form  input[type="text"] {
+
+.main-form  input[type="text"],
+.main-form  input[type="password"] {
     -webkit-appearance: none;
     margin:0;
     margin: 2px 0;
@@ -150,13 +193,15 @@ header {
     margin: 10px 0;
 }
 .main-form input[type="submit"]:hover {
-    background:  #5CC435;
+    background:  #36B107;
 }
 .main-form label {
     font-size:14px;
 }
 
-/* ------------- footer ---------------*/
+/* ------------- 
+footer
+---------------- */
 footer {
     position: absolute;
     bottom: 0;
@@ -164,16 +209,69 @@ footer {
     color: #fff;
     width: 100%;
 }
+
 footer .center {
     padding:20px 0;
 }
 
-/* ------------- forms ---------------- */
+/* ------------- 
+form id's 
+---------------- */
 #clientes-form {
 
 }
 
-/* ------------ main ----------------- */
+
+/* ------------- 
+main styles
+---------------- */
 main .center {
     padding: 40px 0;
+}
+
+/* ------------- 
+table classes
+---------------- */
+.main-table {
+	width: 100%;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	padding: 4px;
+}
+
+.main-table th, 
+.main-table td {
+	padding: 4px;
+	border-right: 1px solid #ccc;
+	border-bottom: 1px solid #ccc;
+}
+
+.main-table th:last-child, 
+.main-table td:last-child {
+	border-right: 0;
+}
+
+.main-table tr:last-child td {
+	border-bottom: 0;
+}
+
+#login-box {
+    position: absolute;
+    width: 16%;
+    height: 22%;
+    left:0;
+    right:0;
+    top: 30%;
+    margin: 0 auto;
+    border: 1px solid #ccc;
+    border-radius: 2px;
+    padding:20px;
+}
+
+#login-form input{
+    width: 97%;
+}
+
+#login-form input[type="submit"] {
+    width: 100%;
 }
