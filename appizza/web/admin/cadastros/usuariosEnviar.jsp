@@ -34,7 +34,8 @@
 
         Statement stmt = con.createStatement();
 // TODO: Como que eu vou passar o CD_USUARIO?
-        stmt.executeUpdate("INSERT INTO USUARIOS VALUES( ??????? ,nome, login, senha, privilegio, email)");
+         //É só deixar o cd_usuario como null ou ''.
+        stmt.executeUpdate("INSERT INTO USUARIOS VALUES(null, login, senha, privilegio, email)");
 
         con.close();
 
