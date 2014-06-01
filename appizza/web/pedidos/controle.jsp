@@ -10,12 +10,13 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link href="../_res/css/style.css" type="text/css" rel="stylesheet" />
         <title>Controle de Pedidos</title>
     </head>
     <body>
-        <%@include file="../../_templates/header.jsp" %>
+        <%@include file="../_templates/header.jsp" %>
         
         
-         <%@include file="../../_templates/footer.jsp" %>
+         <%@include file="../_templates/footer.jsp" %>
     </body>
 </html>
