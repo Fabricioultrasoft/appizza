@@ -1,19 +1,17 @@
 <%-- 
-    Document   : usuarios
-    Created on : 28/05/2014, 23:53:30
+    Document   : produtos
+    Created on : 31/05/2014, 03:31:06
     Author     : Rycardo
 --%>
 <%@page import="java.sql.*"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-
 <!DOCTYPE html>
-
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link href="<%=request.getContextPath()%>/_res/css/style.css" type="text/css" rel="stylesheet" />
         <link rel="stylesheet" href="<%=request.getContextPath()%>/_res/css/font-awesome.min.css" type="text/css">
-        <title>Appizza - Usuarios</title>
+        <title>Appizza - Tipos de Produto</title>
     </head> 
     <body>
 
@@ -27,13 +25,12 @@
                     <li><a href="#"><i class="fa fa-file-text-o"></i>Relatório</a></li>
                 </ul>
             </nav> 
-            <form class="main-form" id="pesquisar-form" action="usuarios.jsp">
+            <form class="main-form" id="pesquisar-form">
                 <label for="pesquisa"></label><input type="text" id="pesquisa" placeholder="Digite a pesquisa" name="pesquisa"/>
                 <label for="lista-pesquisar-form"></label>
                 <select id="lista-pesquisar-form" name="pesquisa-parametro">
                     <option value="1">Código</option>
-                    <option value="2">Nome</option>
-                    <option value="3">Email</option>
+                    <option value="2">Tipo de Produto</option>
                 </select>
                 <input type="submit" value="Enviar" />
             </form>
@@ -41,10 +38,7 @@
             <table class='main-table' cellspacing='0'>
                 <tr>
                     <th width='10%'>Código</th>
-                    <th width='10%'>Nome</th>
-                    <th width='10%'>Login</th>
-                    <th width='10%'>Privilégio</th>
-                    <th width='10%'>Email</th>
+                    <th width='10%'>Tipo</th>
                 </tr>
                 <%
                     String pesquisa = "";
@@ -64,22 +58,17 @@
                             String sql = "";
 
                             if (parametro.equals("1")) {
-                                sql = "SELECT * FROM USUARIOS WHERE CD_USUARIO = " + pesquisa;
-                            } else if (parametro.equals("2")) {
-                                sql = "SELECT * FROM USUARIOS WHERE NM_USUARIO LIKE UPPER('%" + pesquisa + "%')";
-                            } else if (parametro.equals("3")) {
-                                sql = "SELECT * FROM USUARIOS WHERE NM_EMAIL_USUARIO LIKE UPPER('%" + pesquisa + "%')";
-                            }
+                                sql = "SELECT * FROM TIPOS_PRODUTO WHERE CD_TIPO_PRODUTO = " + pesquisa;
+                            }else{
+                                sql = "SELECT * FROM TIPOS_PRODUTO WHERE NM_TIPO_PRODUTO LIKE UPPER('%" + pesquisa + "%')";
+                            } 
 
                             ResultSet rs = stmt.executeQuery(sql);
 
                             while (rs.next()) {
                                 out.println("<tr>");
-                                out.println("<td>" + rs.getString("CD_USUARIO") + "</td>");
-                                out.println("<td>" + rs.getString("NM_USUARIO") + "</td>");
-                                out.println("<td>" + rs.getString("NM_LOGIN_USUARIO") + "</td>");
-                                out.println("<td>" + rs.getString("NM_PRIVILEGIO_USUARIO") + "</td>");
-                                out.println("<td>" + rs.getString("NM_EMAIL_USUARIO") + "</td>");
+                                out.println("<td>" + rs.getString("CD_TIPO_PRODUTO") + "</td>");
+                                out.println("<td>" + rs.getString("NM_TIPO_PRODUTO") + "</td>");
                                 out.println("</tr>");
                             }
 
@@ -97,16 +86,8 @@
 
             <br/>
             <form class="main-form" id="usuarios-form">
-                <h1>Novo Usuário</h1>
+                <h1>Novo Tipo de Produto</h1>
                 <label for="nome">Nome</label><br/><input type="text" id="nome" name="nome"/><br/>
-                <label for="login">Login</label><br/><input type="text" id="login" name="login"/><br/>
-                <label for="senha">Senha</label><br/><input type="password" id="senha" name="senha"/><br/>
-                <label for="email">Email</label><br/><input type="text" id="email" name="email"/><br/>
-                <label for="lista-usuarios-form">Selecione um privilégio  </label><br/>
-                <select id="lista-usuarios-form" name="lista-usuarios-form">
-                    <option value='administrador'>Administrador</option>
-                    <option selected value='usuario'>Usuário</option>
-                </select>
                 <br/>
                 <input type="submit" value="Enviar" />
             </form>
@@ -114,16 +95,8 @@
             <%
                 String nome = "";
                 nome = request.getParameter("nome");
-                String login = "";
-                login = request.getParameter("login");
-                String senha = "";
-                senha = request.getParameter("senha");
-                String privilegio = "";
-                privilegio = request.getParameter("lista-usuarios-form");
-                String email = "";
-                email = request.getParameter("email");
-                    
-                if(nome != null && nome !="" && login != null && login != "" && senha != null && senha != "" && privilegio != null && email != null && email != ""){
+
+                if (nome != null && nome != "") {
                     try {
 
                         Class.forName("oracle.jdbc.OracleDriver");
@@ -132,7 +105,7 @@
 
                         Statement stmt = con.createStatement();
 
-                        ResultSet rs = stmt.executeQuery("INSERT INTO USUARIOS VALUES(null, UPPER('" + nome + "'), UPPER('" + login + "'), '" + senha + "', UPPER('" + privilegio + "'), UPPER('" + email + "'))");
+                        ResultSet rs = stmt.executeQuery("INSERT INTO TIPOS_PRODUTO VALUES(null, UPPER('" + nome + "'))");
 
                         con.close();
 
@@ -143,7 +116,7 @@
 
                         out.println("Erro: " + ex.getMessage());
                     }
-                    out.print("<b><font color='green' size='2'>Cadastro efetuado com sucesso!</font></b>");
+                    out.print("<b><font color='green' size='2'>Tipo de produto cadastrado com sucesso!</font></b>");
                 }
             %>  
 
