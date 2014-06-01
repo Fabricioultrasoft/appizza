@@ -4,5 +4,4 @@
     Author     : Antonio
 --%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<div class="fb-comments" data-href="https://www.facebook.com/groups/1450802021833668/" data-numposts="5" data-colorscheme="light"></div>
+<div class="fb-comments" data-href="https://www.facebook.com/groups/625494227546170/" data-numposts="5" data-colorscheme="light"></div>
