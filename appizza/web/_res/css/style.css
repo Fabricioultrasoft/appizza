@@ -275,3 +275,11 @@ table classes
 #login-form input[type="submit"] {
     width: 100%;
 }
+
+#listaEmails{
+    border-bottom: 1px solid #B90202;
+}
+
+.cardapio{
+    width: 280px;
+}
