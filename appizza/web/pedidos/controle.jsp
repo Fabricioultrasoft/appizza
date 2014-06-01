@@ -4,14 +4,18 @@
     Author     : Marco
 --%>
 
+<%@page import="java.sql.*"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Controle de Pedidos</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
+        <%@include file="../../_templates/header.jsp" %>
+        
+        
+         <%@include file="../../_templates/footer.jsp" %>
     </body>
 </html>
