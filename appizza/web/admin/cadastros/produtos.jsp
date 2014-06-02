@@ -17,6 +17,11 @@
         <%@include file="../../_templates/header.jsp" %>
     <main>
         <div class="center">
+            <nav id="top-menu">
+                <ul>
+                    <li><a href="#"><i class="fa fa-file-text-o"></i>Gerar Relatório</a></li>
+                </ul>
+            </nav> 
             <form class="main-form" id="pesquisar-form" action="produtos.jsp">
                 <label for="pesquisa"></label><input type="text" id="pesquisa" placeholder="Digite a pesquisa" name="pesquisa"/>
                 <label for="lista-pesquisar-form"></label>
