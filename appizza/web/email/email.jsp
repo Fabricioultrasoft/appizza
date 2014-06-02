@@ -4,6 +4,13 @@
     Author     : Antonio
 --%>
 
+<%@page import="java.util.Date"%>
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="java.sql.PreparedStatement"%>
+<%@page import="net.appizza.OracleConnector"%>
+<%@page import="java.sql.ResultSet"%>
+<%@page import="java.sql.Statement"%>
+<%@page import="java.sql.Connection"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -16,18 +23,25 @@
 
         <%@include file="../_templates/header.jsp" %>
         <main>
+            <%
+                Date data = new Date();
+                data.getTime();
+                String dataAtual = data.toString();
+            %>
             <div class="center">
-                <form class="main-form" id="clientes-form">
-                    <input type="hidden" name="id_email"/>
+                <form class="main-form" id="clientes-form" action="enviado.jsp" method="post">
+                    
+                    <input type="hidden" name="data" value="<%=dataAtual%>">
                     <h1>Enviar E-Mails aos Cliente</h1>
-                    <label for="remetente">Remetente</label><br/><input type="text" id="remetente" size="70"/><br/>
-                    <label for="destinatario">Destinatário(s)</label><br/><input type="text" id="destinatario" size="70"/> <a href="listarEmails.jsp"><img src="../_res/images/busca.gif" alt="Listar E-Mails dos Clientes"></a><br/>
-                    <label for="assunto">Assunto</label><br/><input type="text" id="assunto" size="70"/><br/>
-                    <label for="mensagem">Mensagem</label><br/><textarea cols="55" rows="10" id="mensagem"></textarea><br>
+                    <label for="codigo">Código</label><br/><input type="text" name="codigo" size="70" id="codigo" required/><br/>
+                    <label for="remetente">Remetente</label><br/><input type="text" id="remetente" size="70" required/><br/>
+                    <label for="destinatario">Destinatário(s)</label><br/><input type="text" id="destinatario" size="70" required/> <a href="listarEmails.jsp"><img src="../_res/images/busca.gif" alt="Listar E-Mails dos Clientes"></a><br/>
+                    <label for="assunto">Assunto</label><br/><input type="text" id="assunto" name="assunto" value="${param.assunto}" size="70" required /><br/>
+                    <label for="mensagem">Mensagem</label><br/><textarea cols="55" rows="10" id="mensagem" name="conteudo" required ></textarea><br>
                     <input type="submit" value="Enviar" />
                 </form>
             </div>
-            
+           
         </main>
         <%@include file="../_templates/footer.jsp" %>
     </body>
