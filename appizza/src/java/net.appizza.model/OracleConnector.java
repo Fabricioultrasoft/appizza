@@ -5,25 +5,25 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
-
 /**
  *
  * @author MRBELTRAMI
  */
 public class OracleConnector {
-    public static Connection getConnection() throws Exception {
+    public static Connection getConnecao() throws Exception {
         Class.forName("oracle.jdbc.driver.OracleDriver");
         String url = "jdbc:oracle:thin:@localhost:1521:XE";
         return DriverManager.getConnection(url, "appizza", "appizza");
         
     }
-    public static int executeStatement(String SQL) throws Exception{
+    public static int executarStatement(String SQL) throws Exception
+    {
         Exception e = null;
         int result = 0;
         Connection con = null;
         Statement stmt = null;
         try{
-            con = getConnection();
+            con = getConnecao();
             stmt = con.createStatement();
             result = stmt.executeUpdate(SQL);
         }catch(Exception ex){
@@ -35,14 +35,15 @@ public class OracleConnector {
         if(e != null)throw e;
         return result;
     }
-    public static ArrayList<Object[]> getQuery(String SQL) throws Exception{
+    public static ArrayList<Object[]> getQuery(String SQL) throws Exception
+    {
         Exception e = null;
         Connection con = null;
         Statement stmt = null;
         ResultSet rs = null;
         ArrayList<Object[]> result = null;
         try{
-            con = getConnection();
+            con = getConnecao();
             stmt = con.createStatement();
             rs = stmt.executeQuery(SQL);
             result = new ArrayList<>();
