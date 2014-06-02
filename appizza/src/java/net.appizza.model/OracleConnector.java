@@ -10,7 +10,7 @@ import java.util.ArrayList;
  * @author MRBELTRAMI
  */
 public class OracleConnector {
-    public static Connection getConnetion() throws Exception {
+    public static Connection getConnection() throws Exception {
         Class.forName("oracle.jdbc.driver.OracleDriver");
         String url = "jdbc:oracle:thin:@localhost:1521:XE";
         return DriverManager.getConnection(url, "appizza", "appizza");
@@ -23,7 +23,7 @@ public class OracleConnector {
         Connection con = null;
         Statement stmt = null;
         try{
-            con = getConnetion();
+            con = getConnection();
             stmt = con.createStatement();
             result = stmt.executeUpdate(SQL);
         }catch(Exception ex){
@@ -43,7 +43,7 @@ public class OracleConnector {
         ResultSet rs = null;
         ArrayList<Object[]> result = null;
         try{
-            con = getConnetion();
+            con = getConnection();
             stmt = con.createStatement();
             rs = stmt.executeQuery(SQL);
             result = new ArrayList<>();
