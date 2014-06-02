@@ -1,0 +1,1 @@
+delete from TIPOS_PRODUTO where CD_TIPO_PRODUTO = 12
