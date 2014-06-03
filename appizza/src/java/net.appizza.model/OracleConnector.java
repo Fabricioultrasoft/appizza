@@ -1,4 +1,4 @@
-package net.appizza;
+package net.appizza.model;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
