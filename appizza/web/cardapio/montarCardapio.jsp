@@ -25,8 +25,9 @@
             <div class="center">
                 <form class="main-form" id="clientes-form" action="cardapioMontado.jsp">
                     <h1>Montar Cardápio</h1>
-                    <label for="tipo">Tipo de Produto</label><br/>
-                    <select name="tipo_produto" style='width: 460px;'>
+                    <label for="tipos_produto">Tipos de Produto</label><br/>
+                    <select name="tiposProdutos" style='width: 460px;'>
+                        <option></option>
                             <%
                                 Connection con = OracleConnector.getConnection();
                                 Statement stmt = con.createStatement();
@@ -39,8 +40,8 @@
                                 %>                        
                     </select>
                     <br/>
-                    <label for="produto">Produto</label><br/>
-                    <select name="produto" style='width: 460px;'>
+                    <select name="tiposProdutos" style='width: 460px;'>
+                        <option></option>
                             <%
                                 rs = stmt.executeQuery("Select nm_produto from produtos");
                                 while(rs.next()){
@@ -50,7 +51,9 @@
                                     }
                                 %>                        
                     </select>
+                    
                     <br/>
+                    
                     
                     <input type="submit" value="Gerar Cardápio" />
                 </form>
