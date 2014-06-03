@@ -4,23 +4,29 @@
     Author     : Daniel
 --%>
 
+<%
+    if(session.getAttribute("userName") == null) {
+        response.sendRedirect(request.getContextPath() + "/login.jsp");
+    }
+    
+    if(request.getParameter("logoff") != null) {
+        session.removeAttribute("userName");
+        session.removeAttribute("userLogin");
+        session.removeAttribute("userAccess");
+        response.sendRedirect(request.getContextPath() + "/login.jsp");
+    }
+    
+%>
 <header>
     <div class="center">
        <a href="#" class="logo">
             <h1>Appizza</h1>
        </a>
-        <nav id="main-menu">
-            <ul>
-                <li><a href="#">Opção 1</a></li>
-                <li><a href="#">Opção 2</a></li>
-                <li><a href="#">Opção 3</a></li>
-                <li><a href="#">Opção 4</a></li>
-            </ul>
-        </nav>
+        <%@include file="menu.jsp"%>
         <% if (request.getSession().getAttribute("userName") != null) { %>
         <div id="login-area">
             Logado como <a href=""><%=request.getSession().getAttribute("userName")%></a><br>
-            <a href="">Sair</a>
+            <a href="?logoff=true" >Sair</a>
         </div>
         <% } %>
     </div>
