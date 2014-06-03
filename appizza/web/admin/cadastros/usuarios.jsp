@@ -169,7 +169,6 @@
 
                         out.println("Erro: " + ex.getMessage());
                     }
-                    out.print("<b><font color='green' size='2'>Usuário cadastrado com sucesso!</font></b>");
                 }
             %>  
 

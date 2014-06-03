@@ -146,7 +146,6 @@
 
                         out.println("Erro: " + ex.getMessage());
                     }
-                    out.print("<b><font color='green' size='2'>Tipo de produto cadastrado com sucesso!</font></b>");
                 }
             %>  
 
