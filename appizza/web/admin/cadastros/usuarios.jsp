@@ -113,6 +113,8 @@
                                 try{if(rs != null){rs.close();}}catch(Exception ex){}
                                 try{if(con != null){con.close();}}catch(Exception ex){}
                             }
+                            
+                            response.sendRedirect("usuarios.jsp");
                         }
 
                     } %>

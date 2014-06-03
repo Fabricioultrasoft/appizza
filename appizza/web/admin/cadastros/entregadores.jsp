@@ -54,7 +54,7 @@
 
                         Connection con = OracleConnector.getConnection();
                         String sql = "SELECT * FROM ENTREGADORES ";
-                        if(pesquisa != null && parametro != null) {    
+                        if (pesquisa != null && parametro != null) {
                             if (parametro.equals("1")) {
                                 sql += "WHERE CD_ENTREGADOR = " + pesquisa;
                             } else {
@@ -116,6 +116,8 @@
                                 } catch (Exception ex) {
                                 }
                             }
+                            
+                            response.sendRedirect("entregadores.jsp");
                         }
 
                     } %>
@@ -146,7 +148,7 @@
                         ResultSet rs = stmt.executeQuery("INSERT INTO ENTREGADORES VALUES(null, UPPER('" + nome + "'))");
 
                         con.close();
-                        
+
                         response.sendRedirect("entregadores.jsp");
 
                     } catch (SQLException ex) {
