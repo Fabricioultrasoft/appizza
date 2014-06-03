@@ -7,7 +7,7 @@
 <%@page import="java.util.Date"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.sql.PreparedStatement"%>
-<%@page import="net.appizza.OracleConnector"%>
+<%@page import="net.appizza.model.OracleConnector"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.Statement"%>
 <%@page import="java.sql.Connection"%>

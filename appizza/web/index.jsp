@@ -10,6 +10,9 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link href="_res/css/style.css" type="text/css" rel="stylesheet" />
+        <link rel="stylesheet" href="_res/css/font-awesome.min.css" type="text/css">
+        <script src="_res/scripts/jquery-1.7.1.min.js" type="text/javascript"></script>
+        <script src="_res/scripts/scripts.js" type="text/javascript"></script>
         <title>Appizza</title>
     </head>
     <body>
@@ -17,20 +20,27 @@
         <%@include file="_templates/header.jsp" %>
         <main>
             <div class="center">
-                <form class="main-form" id="clientes-form">
-                    <h1>Clientes</h1>
-                    <label for="nome">Nome</label><br/><input type="text" id="nome"/><br/>
-                    <label for="email">Email</label><br/><input type="text" id="email"/><br/>
-                    <label for="senha">Senha</label><br/><input type="text" id="senha"/><br/>
-                    <label for="lista">Select </label><br/>
-                    <select id="lista">
-                        <option>Selecione uma opção</option>
-                    </select>
-                    <br/>
-                    <input type="submit" value="Enviar" />
-                </form>
+                <nav id="top-menu">
+                    <ul>
+                        <li class="selected"><a href="#" id="opt-1"><i class="fa fa-search"></i>Pesquisa</a></li>
+                        <li><a href="#" id="opt-2"><i class="fa fa-plus-circle"></i>Novo</a></li>
+                        <li><a href="#" id="opt-3"><i class="fa fa-file-text-o"></i>Novo</a></li>
+                    </ul>
+                </nav>
+                <div id="container">
+                    <div id="search-container">
+                        Search content
+                    </div>
+
+                    <div id="add-container">
+                        Add content
+                    </div>
+
+                    <div id="report-container">
+                        Report content
+                    </div>
+                </div>
             </div>
-            
         </main>
         <%@include file="_templates/footer.jsp" %>
     </body>
