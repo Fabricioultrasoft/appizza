@@ -20,8 +20,8 @@
                 <h1 id="listaEmails">Cardapio Montado</h1>
                 <br/><br/>
                 <h3>
-                Pizza: <br/><br/>
-                Sabor: <br/><br/>
+                Produto: <br/><br/>
+                Bebida: <br/><br/>
                 Borda: <br/><br/>
                 Bebida: <br/><br/>
                 Outros: <br/><br/>                
