@@ -23,8 +23,9 @@ $(document).ready(function() {
 
         $(elementId).css("display", "");
     }
+    
+        $("#top-menu ul li a").mouseover(function() {
+
+        });
 });
 
-    function subMenu() {
-        $(this).get(".sub").css("display", "");
-    }

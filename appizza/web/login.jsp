@@ -37,18 +37,25 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Appizza - Login</title>
         <link rel="stylesheet" href="_res/css/style.css" type="text/css">
+        <style>
+            body {
+                overflow: hidden;
+            }
+        </style>
     </head>
     <body>
-        <div id="login-box">
-            <h1>Appizza</h1>
-            <form id="login-form" class="main-form" method="POST">
-                <label for="user">Usuário </label><br /><input type="text" name="user"/><br />
-                <label for="passwd">Senha </label><br /><input type="password" name="password"/><br />
-                <input type="submit" value="Entrar" />
-                <%if (!erro.equals("")) {%>
-                <span><%=erro%></span>
-                <%}%>
-            </form>
+        <div id="login-container">
+            <div id="login-box">
+                <h1>Appizza</h1>
+                <form id="login-form" class="main-form" method="POST">
+                    <label for="user">Usuário </label><br /><input type="text" name="user"/><br />
+                    <label for="passwd">Senha </label><br /><input type="password" name="password"/><br />
+                    <input type="submit" value="Entrar" />
+                    <%if (!erro.equals("")) {%>
+                    <span><%=erro%></span>
+                    <%}%>
+                </form>
+            </div>
         </div>
     </body>
 </html>

@@ -4,7 +4,7 @@
     Author     : Rycardo
 --%>
 
-<%@page import="net.appizza.OracleConnector"%>
+<%@page import="net.appizza.model.OracleConnector"%>
 <%@page import="java.sql.*"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>

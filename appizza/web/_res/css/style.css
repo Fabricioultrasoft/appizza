@@ -278,8 +278,15 @@ table classes
 	border-bottom: 0;
 }
 
-#login-box {
+#login-container {
     position: absolute;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    top:30%;    
+}
+#login-box {
+    position: relative;
     width: 16%;
     height: 22%;
     left:0;
@@ -320,6 +327,10 @@ table classes
     text-align: center; 
 }
 
+#login-area {
+    margin:6px 0 0 0;
+    float: right;
+}
 #listaEmails{
     border-bottom: 1px solid #B90202;
 }

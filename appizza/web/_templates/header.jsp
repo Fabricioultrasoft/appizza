@@ -7,6 +7,11 @@
 <%
     if(session.getAttribute("userName") == null) {
         response.sendRedirect(request.getContextPath() + "/login.jsp");
+    } else {
+        if(request.getRequestURI().contains("admin") && !session.getAttribute("userAccess").equals("Administrador")) {
+            
+            response.sendRedirect(request.getContextPath() + "/naopermitido.jsp");
+        }
     }
     
     if(request.getParameter("logoff") != null) {
@@ -22,12 +27,11 @@
        <a href="#" class="logo">
             <h1>Appizza</h1>
        </a>
-        <%@include file="menu.jsp"%>
         <% if (request.getSession().getAttribute("userName") != null) { %>
         <div id="login-area">
-            Logado como <a href=""><%=request.getSession().getAttribute("userName")%></a><br>
-            <a href="?logoff=true" >Sair</a>
+            Logado como <a href="<%=request.getContextPath()%>/usuario.jsp"><%=request.getSession().getAttribute("userName")%></a><a href="?logoff=true" >Sair</a>
         </div>
         <% } %>
+        <%@include file="menu.jsp"%>
     </div>
 </header>

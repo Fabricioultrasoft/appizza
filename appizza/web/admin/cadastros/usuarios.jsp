@@ -3,7 +3,7 @@
     Created on : 28/05/2014, 23:53:30
     Author     : Rycardo
 --%>
-<%@page import="net.appizza.OracleConnector"%>
+<%@page import="net.appizza.model.OracleConnector"%>
 <%@page import="java.sql.*"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
