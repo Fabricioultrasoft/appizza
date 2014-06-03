@@ -19,6 +19,5 @@
         <li><a href="#">Pedidos</a></li>
         <li><a href="#">Cardápios</a></li>
         <li><a href="#">E-mails</a></li>
-        <li><a href="#">Redes sociais</a></li>
     </ul>
 </nav>
