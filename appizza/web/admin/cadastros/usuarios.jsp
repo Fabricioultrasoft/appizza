@@ -3,6 +3,7 @@
     Created on : 28/05/2014, 23:53:30
     Author     : Rycardo
 --%>
+<%@page import="net.appizza.OracleConnector"%>
 <%@page import="java.sql.*"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
@@ -45,32 +46,30 @@
                     <th width='10%'>Login</th>
                     <th width='10%'>Privilégio</th>
                     <th width='10%'>Email</th>
+                    <th width='3%' colspan='2'>Ações</th>
                 </tr>
                 <%
                     String pesquisa = "";
                     pesquisa = request.getParameter("pesquisa");
                     String parametro = "";
                     parametro = request.getParameter("pesquisa-parametro");
+                    String acao = request.getParameter("acao");
 
-                    if (pesquisa != null && pesquisa != "" && parametro != null) {
                         try {
 
-                            Class.forName("oracle.jdbc.driver.OracleDriver");
+                            Connection con = OracleConnector.getConnection();
+                            String sql = "SELECT * FROM USUARIOS ";
 
-                            Connection con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE", "appizza", "appizza");
-
-                            Statement stmt = con.createStatement();
-
-                            String sql = "";
-
+                    if (pesquisa != null && pesquisa != "" && parametro != null) {
                             if (parametro.equals("1")) {
-                                sql = "SELECT * FROM USUARIOS WHERE CD_USUARIO = " + pesquisa;
+                                sql += "WHERE CD_USUARIO = " + pesquisa;
                             } else if (parametro.equals("2")) {
-                                sql = "SELECT * FROM USUARIOS WHERE NM_USUARIO LIKE UPPER('%" + pesquisa + "%')";
+                                sql += "WHERE NM_USUARIO LIKE UPPER('%" + pesquisa + "%')";
                             } else if (parametro.equals("3")) {
-                                sql = "SELECT * FROM USUARIOS WHERE NM_EMAIL_USUARIO LIKE UPPER('%" + pesquisa + "%')";
+                                sql += "WHERE NM_EMAIL_USUARIO LIKE UPPER('%" + pesquisa + "%')";
                             }
-
+                    }
+                            Statement stmt = con.createStatement();
                             ResultSet rs = stmt.executeQuery(sql);
 
                             while (rs.next()) {
@@ -80,6 +79,8 @@
                                 out.println("<td>" + rs.getString("NM_LOGIN_USUARIO") + "</td>");
                                 out.println("<td>" + rs.getString("NM_PRIVILEGIO_USUARIO") + "</td>");
                                 out.println("<td>" + rs.getString("NM_EMAIL_USUARIO") + "</td>");
+                                out.println("<td><center><a href='usuarios_editar.jsp?cd_usuario=" + rs.getString("CD_USUARIO") + "'<i class='fa fa-edit'></center></td>");
+                                out.println("<td><center><a href='?acao=delete&cd_usuario=" + rs.getString("CD_USUARIO") + "'<i class='fa fa-times'></a></center></td>");
                                 out.println("</tr>");
                             }
 
@@ -91,6 +92,29 @@
 
                             out.println("Erro: " + ex.getMessage());
                         }
+                        
+                     if (acao != null) {
+
+                        if (acao.equals("delete")) {
+
+                            Connection con = OracleConnector.getConnection();
+                            Statement stmt = null;
+                            ResultSet rs = null;
+                            String sql = "";
+
+                            sql = "DELETE FROM USUARIOS WHERE CD_USUARIO = " + request.getParameter("cd_usuario");
+                            try {
+                                stmt = con.createStatement();
+                                rs = stmt.executeQuery(sql);
+                            } catch (Exception ex) {
+                                out.println("Erro ao deletar usuário: " + ex);
+                            } finally {
+                                try{if(stmt != null){con.close();}}catch(Exception ex){}
+                                try{if(rs != null){rs.close();}}catch(Exception ex){}
+                                try{if(con != null){con.close();}}catch(Exception ex){}
+                            }
+                        }
+
                     } %>
             </table>
             <br/>
@@ -122,8 +146,8 @@
                 privilegio = request.getParameter("lista-usuarios-form");
                 String email = "";
                 email = request.getParameter("email");
-                    
-                if(nome != null && nome !="" && login != null && login != "" && senha != null && senha != "" && privilegio != null && email != null && email != ""){
+
+                if (nome != null && nome != "" && login != null && login != "" && senha != null && senha != "" && privilegio != null && email != null && email != "") {
                     try {
 
                         Class.forName("oracle.jdbc.OracleDriver");
@@ -135,6 +159,8 @@
                         ResultSet rs = stmt.executeQuery("INSERT INTO USUARIOS VALUES(null, UPPER('" + nome + "'), UPPER('" + login + "'), '" + senha + "', UPPER('" + privilegio + "'), UPPER('" + email + "'))");
 
                         con.close();
+                        
+                        response.sendRedirect("usuarios.jsp");
 
                     } catch (SQLException ex) {
 
@@ -143,7 +169,7 @@
 
                         out.println("Erro: " + ex.getMessage());
                     }
-                    out.print("<b><font color='green' size='2'>Cadastro efetuado com sucesso!</font></b>");
+                    out.print("<b><font color='green' size='2'>Usuário cadastrado com sucesso!</font></b>");
                 }
             %>  
 

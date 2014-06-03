@@ -4,6 +4,7 @@
     Author     : Rycardo
 --%>
 
+<%@page import="net.appizza.OracleConnector"%>
 <%@page import="java.sql.*"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -39,48 +40,84 @@
             <table class='main-table' cellspacing='0'>
                 <tr>
                     <th width='10%'>Código</th>
-                    <th width='10%'>Tipo</th>
+                    <th width='10%'>Nome</th>
+                    <th width='3%' colspan='2'>Ações</th>
                 </tr>
                 <%
                     String pesquisa = "";
                     pesquisa = request.getParameter("pesquisa");
                     String parametro = "";
                     parametro = request.getParameter("pesquisa-parametro");
+                    String acao = request.getParameter("acao");
 
-                    if (pesquisa != null && pesquisa != "" && parametro != null) {
-                        try {
+                    try {
 
-                            Class.forName("oracle.jdbc.driver.OracleDriver");
+                        Connection con = OracleConnector.getConnection();
+                        String sql = "SELECT * FROM ENTREGADORES ";
+                        if(pesquisa != null && parametro != null) {    
+                            if (parametro.equals("1")) {
+                                sql += "WHERE CD_ENTREGADOR = " + pesquisa;
+                            } else {
+                                sql += "WHERE NM_ENTREGADOR LIKE UPPER('%" + pesquisa + "%')";
+                            }
+                        }
+                        Statement stmt = con.createStatement();
+                        ResultSet rs = stmt.executeQuery(sql);
 
-                            Connection con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE", "appizza", "appizza");
+                        while (rs.next()) {
+                            out.println("<tr>");
+                            out.println("<td>" + rs.getString("CD_ENTREGADOR") + "</td>");
+                            out.println("<td>" + rs.getString("NM_ENTREGADOR") + "</td>");
+                            out.println("<td><center><a href='entregadores_editar.jsp?cd_entregador=" + rs.getString("CD_ENTREGADOR") + "'<i class='fa fa-edit'></center></td>");
+                            out.println("<td><center><a href='?acao=delete&cd_entregador=" + rs.getString("CD_ENTREGADOR") + "'<i class='fa fa-times'></a></td></center>");
+                            out.println("</tr>");
+                        }
 
-                            Statement stmt = con.createStatement();
+                        con.close();
+                    } catch (SQLException ex) {
 
+                        out.println("Erro: " + ex.getMessage());
+                    } catch (ClassNotFoundException ex) {
+
+                        out.println("Erro: " + ex.getMessage());
+                    }
+                    if (acao != null) {
+
+                        if (acao.equals("delete")) {
+
+                            Connection con = OracleConnector.getConnection();
+                            Statement stmt = null;
+                            ResultSet rs = null;
                             String sql = "";
 
-                            if (parametro.equals("1")) {
-                                sql = "SELECT * FROM ENTREGADORES WHERE CD_ENTREGADOR = " + pesquisa;
-                            }else{
-                                sql = "SELECT * FROM ENTREGADORES WHERE NM_ENTREGADOR LIKE UPPER('%" + pesquisa + "%')";
-                            } 
-
-                            ResultSet rs = stmt.executeQuery(sql);
-
-                            while (rs.next()) {
-                                out.println("<tr>");
-                                out.println("<td>" + rs.getString("CD_ENTREGADOR") + "</td>");
-                                out.println("<td>" + rs.getString("NM_ENTREGADOR") + "</td>");
-                                out.println("</tr>");
+                            sql = "DELETE FROM ENTREGADORES WHERE CD_ENTREGADOR = " + request.getParameter("cd_entregador");
+                            try {
+                                stmt = con.createStatement();
+                                rs = stmt.executeQuery(sql);
+                            } catch (Exception ex) {
+                                out.println("Erro ao deletar usuário: " + ex);
+                            } finally {
+                                try {
+                                    if (stmt != null) {
+                                        con.close();
+                                    }
+                                } catch (Exception ex) {
+                                }
+                                try {
+                                    if (rs != null) {
+                                        rs.close();
+                                    }
+                                } catch (Exception ex) {
+                                }
+                                try {
+                                    if (con != null) {
+                                        con.close();
+                                    }
+                                } catch (Exception ex) {
+                                }
                             }
-
-                            con.close();
-                        } catch (SQLException ex) {
-
-                            out.println("Erro: " + ex.getMessage());
-                        } catch (ClassNotFoundException ex) {
-
-                            out.println("Erro: " + ex.getMessage());
                         }
+
                     } %>
             </table>
             <br/>
@@ -109,6 +146,8 @@
                         ResultSet rs = stmt.executeQuery("INSERT INTO ENTREGADORES VALUES(null, UPPER('" + nome + "'))");
 
                         con.close();
+                        
+                        response.sendRedirect("entregadores.jsp");
 
                     } catch (SQLException ex) {
 
@@ -117,7 +156,6 @@
 
                         out.println("Erro: " + ex.getMessage());
                     }
-                    out.print("<b><font color='green' size='2'>Entregador cadastrado com sucesso!</font></b>");
                 }
             %>  
 

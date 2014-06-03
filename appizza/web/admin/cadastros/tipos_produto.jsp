@@ -3,6 +3,7 @@
     Created on : 31/05/2014, 03:31:06
     Author     : Rycardo
 --%>
+<%@page import="net.appizza.OracleConnector"%>
 <%@page import="java.sql.*"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -39,14 +40,15 @@
                 <tr>
                     <th width='10%'>Código</th>
                     <th width='10%'>Tipo</th>
+                    <th width='3%' colspan='2'>Ações</th>
                 </tr>
                 <%
                     String pesquisa = "";
                     pesquisa = request.getParameter("pesquisa");
                     String parametro = "";
                     parametro = request.getParameter("pesquisa-parametro");
+                    String acao = request.getParameter("acao");
 
-                    if (pesquisa != null && pesquisa != "" && parametro != null) {
                         try {
 
                             Class.forName("oracle.jdbc.driver.OracleDriver");
@@ -55,13 +57,15 @@
 
                             Statement stmt = con.createStatement();
 
-                            String sql = "";
+                            String sql = "SELECT * FROM TIPOS_PRODUTO ";
 
+                    if (pesquisa != null && pesquisa != "" && parametro != null) {
                             if (parametro.equals("1")) {
-                                sql = "SELECT * FROM TIPOS_PRODUTO WHERE CD_TIPO_PRODUTO = " + pesquisa;
+                                sql += "WHERE CD_TIPO_PRODUTO = " + pesquisa;
                             }else{
-                                sql = "SELECT * FROM TIPOS_PRODUTO WHERE NM_TIPO_PRODUTO LIKE UPPER('%" + pesquisa + "%')";
+                                sql += "WHERE NM_TIPO_PRODUTO LIKE UPPER('%" + pesquisa + "%')";
                             } 
+                    }
 
                             ResultSet rs = stmt.executeQuery(sql);
 
@@ -69,6 +73,8 @@
                                 out.println("<tr>");
                                 out.println("<td>" + rs.getString("CD_TIPO_PRODUTO") + "</td>");
                                 out.println("<td>" + rs.getString("NM_TIPO_PRODUTO") + "</td>");
+                                out.println("<td><center><a href='tipos_produto_editar.jsp?cd_tipo_produto=" + rs.getString("CD_TIPO_PRODUTO") + "'<i class='fa fa-edit'></center></td>");
+                                out.println("<td><center><a href='?acao=delete&cd_tipo_produto=" + rs.getString("CD_TIPO_PRODUTO") + "'<i class='fa fa-times'></a></td></center>");
                                 out.println("</tr>");
                             }
 
@@ -80,6 +86,28 @@
 
                             out.println("Erro: " + ex.getMessage());
                         }
+                     if (acao != null) {
+
+                        if (acao.equals("delete")) {
+
+                            Connection con = OracleConnector.getConnection();
+                            Statement stmt = null;
+                            ResultSet rs = null;
+                            String sql = "";
+
+                            sql = "DELETE FROM TIPOS_PRODUTO WHERE CD_TIPO_PRODUTO = " + request.getParameter("cd_tipo_produto");
+                            try {
+                                stmt = con.createStatement();
+                                rs = stmt.executeQuery(sql);
+                            } catch (Exception ex) {
+                                out.println("Erro ao deletar usuário: " + ex);
+                            } finally {
+                                try{if(stmt != null){con.close();}}catch(Exception ex){}
+                                try{if(rs != null){rs.close();}}catch(Exception ex){}
+                                try{if(con != null){con.close();}}catch(Exception ex){}
+                            }
+                        }
+
                     } %>
             </table>
             <br/>
@@ -108,6 +136,8 @@
                         ResultSet rs = stmt.executeQuery("INSERT INTO TIPOS_PRODUTO VALUES(null, UPPER('" + nome + "'))");
 
                         con.close();
+                        
+                        response.sendRedirect("tipos_produto.jsp");
 
                     } catch (SQLException ex) {
 
