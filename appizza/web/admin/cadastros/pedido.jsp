@@ -108,18 +108,20 @@
             <br/>
             <form class="main-form" id="usuarios-form">
                 <h1>Novo Pedido</h1>
-                <label for="telefone_cliente">Telefone do Cliente</label><br/><input type="text" id="telefone_cliente" name="telefone_cliente"/><br/>
-                <label for="cod_entregador">Código do Entregador</label><br/><input type="text" id="cod_entregador" name="cod_entregador"/><br/>
-                <label for="nome">Tipo de Pagamento</label><br/><input type="text" id="nome" name="nome"/><br/>
-                <label for="pagamento">Tipo de Pagamento</label><br/><input type="text" id="pagamento" name="pagamento"/><br/>
-                <label for="descricao">Descrição de Pedido</label><br/><input type="text" id="descricao" name="descricao"/><br/>
-                <label for="valor">Valor do Pedido</label><br/><input type="text" id="valor" name="valor"/><br/>
-                <label for="dt_criacao">Data de Criação do Pedido</label><br/><input type="text" id="dt_criacao" name="dt_criacao"/><br/>
-                <label for="dt_envio">Data de Envio do Pedido</label><br/><input type="text" id="dt_envio" name="dt_envio"/><br/>
-                <label for="dt_fechamento">Data de Fechamento do Pedido</label><br/><input type="text" id="dt_fechamento" name="dt_fechamento"/><br/>
-                <label for="nome_entregador">Nome do Entregador</label><br/><input type="text" id="nome_entregador" name="nome_entregador"/><br/>
-                <label for="desc_tipo_pedido">Descrição do Tipo de Pedido</label><br/><input type="text" id="desc_tipo_pedido" name="desc_tipo_pedido"/><br/>
+                <table class='main-table' cellspacing='0' border='0px'>
+                    <tr><td><label for="telefone_cliente">Telefone do Cliente</label><br/><input type="text" id="telefone_cliente" name="telefone_cliente"/><br/></td>
+                        <td><label for="cod_entregador">Código do Entregador</label><br/><input type="text" id="cod_entregador" name="cod_entregador"/><br/></td></tr>
+                    <tr><td><label for="pagamento">Tipo de Pagamento</label><br/><input type="text" id="pagamento" name="pagamento"/><br/></td>
+                        <td><label for="descricao">Descrição de Pedido</label><br/><input type="text" id="descricao" name="descricao"/><br/></td></tr>
+                    <tr><td><label for="valor">Valor do Pedido</label><br/><input type="text" id="valor" name="valor"/><br/></td>
+                        <td><label for="dt_criacao">Data de Criação do Pedido</label><br/><input type="text" id="dt_criacao" name="dt_criacao"/><br/></td></tr>
+                    <tr><td><label for="dt_envio">Data de Envio do Pedido</label><br/><input type="text" id="dt_envio" name="dt_envio"/><br/></td>
+                        <td><label for="dt_fechamento">Data de Fechamento do Pedido</label><br/><input type="text" id="dt_fechamento" name="dt_fechamento"/><br/></td></tr>
+                    <tr><td><label for="nome_entregador">Nome do Entregador</label><br/><input type="text" id="nome_entregador" name="nome_entregador"/><br/></td>
+                        <td><label for="desc_tipo_pedido">Descrição do Tipo de Pedido</label><br/><input type="text" id="desc_tipo_pedido" name="desc_tipo_pedido"/><br/></td></tr>
+                </table>
                 <br/>
+
                 <input type="submit" value="Enviar" />
             </form>
 
@@ -128,8 +130,6 @@
                 tel = request.getParameter("telefone_cliente");
                 String codEntregador = "";
                 codEntregador = request.getParameter("cod_entregador");
-                String nome = "";
-                nome = request.getParameter("nome");
                 String pagamento = "";
                 pagamento = request.getParameter("pagamento");
                 String descricao = "";
@@ -147,7 +147,7 @@
                 String desc_tipo_pedido = "";
                 desc_tipo_pedido = request.getParameter("desc_tipo_pedido");
 
-                if (nome != null && nome != ""  && descricao != "" && descricao != null && desc_tipo_pedido != "" && desc_tipo_pedido != null && valor != null && valor != null && dtCriacao != null && dtCriacao != null && dtEnvio != null && dtEnvio != null && dtFechamento != null && dtFechamento != null && nomeEntregador != null && nomeEntregador != null && tel != null && tel != null && codEntregador != null && codEntregador != null && pagamento != null && pagamento != null) {
+                if (descricao != "" && descricao != null && desc_tipo_pedido != "" && desc_tipo_pedido != null && valor != null && valor != null && dtCriacao != null && dtCriacao != null && dtEnvio != null && dtEnvio != null && dtFechamento != null && dtFechamento != null && nomeEntregador != null && nomeEntregador != null && tel != null && tel != null && codEntregador != null && codEntregador != null && pagamento != null && pagamento != null) {
                     try {
 
                         Class.forName("oracle.jdbc.OracleDriver");
@@ -156,7 +156,7 @@
 
                         Statement stmt = con.createStatement();
 
-                        ResultSet rs = stmt.executeQuery("INSERT INTO PEDIDOS VALUES(null, " + tel + ", " + codEntregador + ", UPPER('" + pagamento + "'), '" + descricao + "'," + valor + ",'"+ dtCriacao+"','"+dtEnvio+"' ,'"+dtFechamento+"','"+nomeEntregador+"','"+desc_tipo_pedido+")");
+                        ResultSet rs = stmt.executeQuery("INSERT INTO PEDIDOS VALUES(null, " + tel + ", " + codEntregador + ", UPPER('" + pagamento + "'), '" + descricao + "'," + valor + ",'" + dtCriacao + "','" + dtEnvio + "' ,'" + dtFechamento + "','" + nomeEntregador + "','" + desc_tipo_pedido + ")");
 
                         con.close();
 
