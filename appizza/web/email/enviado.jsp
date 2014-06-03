@@ -17,14 +17,13 @@
     <body>
 
         <%@include file="../_templates/header.jsp" %>
-         <%//if
+         <%
             try{
                 String data = request.getParameter("data");
-                String codigo = request.getParameter("codigo");
                 String assunto = request.getParameter("assunto");
                 String conteudo = request.getParameter("conteudo");
                 Connection con = OracleConnector.getConnection();
-                String SQL = "INSERT INTO EMAILS VALUES('"+codigo+"','"+assunto+"','"+conteudo+"','"+data+"')";
+                String SQL = "INSERT INTO EMAILS VALUES(null,'"+assunto+"','"+conteudo+"','"+data+"')";
                 OracleConnector.executeStatement(SQL);        
                 response.sendRedirect("email.jsp");
             }catch(Exception ex){

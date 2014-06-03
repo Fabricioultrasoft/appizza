@@ -30,12 +30,24 @@
             %>
             <div class="center">
                 <form class="main-form" id="clientes-form" action="enviado.jsp" method="post">
-                    
                     <input type="hidden" name="data" value="<%=dataAtual%>">
                     <h1>Enviar E-Mails aos Cliente</h1>
-                    <label for="codigo">Código</label><br/><input type="text" name="codigo" size="70" id="codigo" required/><br/>
                     <label for="remetente">Remetente</label><br/><input type="text" id="remetente" size="70" required/><br/>
-                    <label for="destinatario">Destinatário(s)</label><br/><input type="text" id="destinatario" size="70" required/> <a href="listarEmails.jsp"><img src="../_res/images/busca.gif" alt="Listar E-Mails dos Clientes"></a><br/>
+                    <label for="destinatatio">Destinatario</label><br/>
+                    <select name="destinatario" style='width: 460px;'>
+                            <%
+                                Connection con = OracleConnector.getConnection();
+                                Statement stmt = con.createStatement();
+                                ResultSet rs = stmt.executeQuery("Select nm_email_cliente from clientes");
+                                while(rs.next()){
+                                %>
+                                <option><%=rs.getString("nm_email_cliente")%></option>
+                                <%
+                                    }
+                                %>
+                        
+                    </select>
+                    <br/>
                     <label for="assunto">Assunto</label><br/><input type="text" id="assunto" name="assunto" value="${param.assunto}" size="70" required /><br/>
                     <label for="mensagem">Mensagem</label><br/><textarea cols="55" rows="10" id="mensagem" name="conteudo" required ></textarea><br>
                     <input type="submit" value="Enviar" />
