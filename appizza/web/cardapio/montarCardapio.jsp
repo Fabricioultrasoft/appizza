@@ -4,6 +4,12 @@
     Author     : Antonio
 --%>
 
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="java.sql.PreparedStatement"%>
+<%@page import="net.appizza.OracleConnector"%>
+<%@page import="java.sql.ResultSet"%>
+<%@page import="java.sql.Statement"%>
+<%@page import="java.sql.Connection"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -19,74 +25,33 @@
             <div class="center">
                 <form class="main-form" id="clientes-form" action="cardapioMontado.jsp">
                     <h1>Montar Cardápio</h1>
-                    <label for="pizza">Pizza </label><br/>
-                    <select id="pizza" class="cardapio">
-                        <option>-------</option>
-                        <option>Salgada</option>
-                        <option>Doce</option>
+                    <label for="tipo">Tipo de Produto</label><br/>
+                    <select name="tipo_produto" style='width: 460px;'>
+                            <%
+                                Connection con = OracleConnector.getConnection();
+                                Statement stmt = con.createStatement();
+                                ResultSet rs = stmt.executeQuery("Select nm_tipo_produto from tipos_produto");
+                                while(rs.next()){
+                                %>
+                                <option><%=rs.getString("nm_tipo_produto")%></option>
+                                <%
+                                    }
+                                %>                        
+                    </select>
+                    <br/>
+                    <label for="produto">Produto</label><br/>
+                    <select name="produto" style='width: 460px;'>
+                            <%
+                                rs = stmt.executeQuery("Select nm_produto from produtos");
+                                while(rs.next()){
+                                %>
+                                <option><%=rs.getString("nm_produto")%></option>
+                                <%
+                                    }
+                                %>                        
                     </select>
                     <br/>
                     
-                    <label for="sabor">Sabor </label><br/>
-                    <select id="sabor" class="cardapio">
-                        <option>-------</option>
-                        <option>Portuguesa</option>
-                        <option>Paulista</option>
-                        <option>Mussarela</option>
-                        <option>Calabreza</option>
-                        <option>4 Queijos</option>
-                        <option>Presunto</option>
-                        <option>Frango</option>
-                        <option>Peperoni</option>
-                        <option>Champignon</option>
-                        <option>Escarola</option>
-                        <option>Atun</option>
-                    </select>
-                    <br/>
-                    
-                    <label for="borda">Borda </label><br/>
-                    <select id="borda" class="cardapio">
-                        <option>-------</option>
-                        <option>Sem Recheio</option>
-                        <option>Catupiry</option>
-                        <option>Cheeder</option>
-                    </select>
-                    <br/>
-                    
-                    <label for="bebida">Bebida </label><br/>
-                    <select id="bebida" class="cardapio">
-                        <option>-------</option>
-                        <option>Sem Bebida</option>
-                        <option>Agua Mineral</option>
-                        <option>Agua Mineral com gas</option>
-                        <option>Suco Natural de Laranja</option>
-                        <option>Suco Natural de Limão</option>
-                        <option>Suco Natural de Uva</option>
-                        <option>Refrigerante Coca Cola 2L</option>
-                        <option>Refrigerante Coca Cola 600ML</option>
-                        <option>Refrigerante Fanta Laranja 2L</option>
-                        <option>Refrigerante Fanta Laranja 600ML</option>
-                        <option>Refrigerante Guaraná Antartica 2L</option>
-                        <option>Refrigerante Guaraná Antartica 600ML</option>
-                        <option>Cerveja Brahma</option>
-                        <option>Cerveja Antartica</option>
-                        <option>Cerveja Itaipava</option>
-                        <option>Cerveja Bohemia</option>
-                        <option>Cerveja Devasa</option>
-                        <option>Cerveja Skol</option>
-                    </select>
-                    <br/>
-                    
-                    <label for="outros">Outros Pedidos </label><br/>
-                    <select id="outros" class="cardapio">
-                        <option>-------</option>
-                        <option>Sem mais pedidos</option>
-                        <option>Porção de Fritas</option>
-                        <option>Porção de Calabreza</option>
-                        <option>Porção de Frango</option>
-                        <option>Porção de Salame</option>
-                    </select>
-                    <br/>
                     <input type="submit" value="Gerar Cardápio" />
                 </form>
             </div>
