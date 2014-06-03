@@ -5,7 +5,7 @@
 --%>
 
 <%@page import="java.util.ArrayList"%>
-<%@page import="net.appizza.res.OracleConnector"%>
+<%@page import="net.appizza.model.OracleConnector"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <%
